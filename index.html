@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSA — Travel. Explore. More.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#080808; --text:#f7f4ee; --muted:#a8a39a; --line:rgba(255,255,255,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 5vw;mix-blend-mode:difference;
+}
+.logo{font-size:25px;font-weight:800;letter-spacing:7px}
+.navlinks{display:flex;gap:28px;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+.navlinks a{opacity:.8;transition:.3s}.navlinks a:hover{opacity:1}
+.hero{height:100svh;min-height:680px;position:relative;display:grid;place-items:center;overflow:hidden}
+.hero video,.hero:before{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero video{filter:brightness(.53) saturate(.8)}
+.hero:before{content:"";z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.35) 55%,#080808 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:950px;padding:30px;transform-style:preserve-3d}
+.kicker{font-size:12px;letter-spacing:6px;text-transform:uppercase;margin-bottom:24px}
+.hero h1{font-size:clamp(55px,11vw,150px);line-height:.82;letter-spacing:-7px;font-weight:800}
+.hero h1 span{display:block;font-size:.42em;letter-spacing:11px;margin-top:28px}
+.cta{display:inline-flex;margin-top:42px;border:1px solid rgba(255,255,255,.7);padding:15px 25px;border-radius:999px;letter-spacing:2px;font-size:12px;transition:.35s}
+.cta:hover{background:#fff;color:#000;transform:translateY(-4px)}
+.scroll{position:absolute;z-index:3;bottom:28px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:3px;opacity:.7}
+.section{padding:130px 6vw}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:55px}
+.eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+h2{font-size:clamp(42px,7vw,90px);line-height:.9;letter-spacing:-4px}
+.intro{max-width:380px;color:var(--muted);line-height:1.7;font-size:14px}
+.feature-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:stretch}
+.media-card{position:relative;overflow:hidden;border-radius:4px;min-height:620px;background:#111}
+.media-card img,.media-card video{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.media-card:hover img,.media-card:hover video{transform:scale(1.055)}
+.media-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.72))}
+.card-copy{position:absolute;z-index:2;left:28px;right:28px;bottom:28px}
+.card-copy h3{font-size:28px;margin-bottom:9px}.card-copy p{color:#ddd;font-size:13px;line-height:1.6;max-width:460px}
+.side-stack{display:grid;grid-template-rows:1fr 1fr;gap:24px}
+.side-stack .media-card{min-height:0}
+.story{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:center}
+.story img{width:100%;height:650px;object-fit:cover}
+.story-text p{color:var(--muted);line-height:1.9;max-width:520px;margin:25px 0}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:45px}
+.spec{padding:25px 15px;border-right:1px solid var(--line)}
+.spec:last-child{border:0}.spec b{font-size:27px;display:block;margin-bottom:7px}.spec span{font-size:11px;color:var(--muted);letter-spacing:1px}
+.product{min-height:100vh;display:grid;place-items:center;perspective:1400px;background:radial-gradient(circle at 50% 35%,#29251f 0,#0d0c0b 36%,#080808 72%)}
+.product-stage{text-align:center}
+.product-card{width:min(470px,82vw);aspect-ratio:4/5;position:relative;transform-style:preserve-3d;transition:transform .15s ease-out;box-shadow:0 45px 100px rgba(0,0,0,.55);overflow:hidden}
+.product-card img{width:100%;height:100%;object-fit:cover}
+.product-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.6))}
+.product-label{position:absolute;z-index:2;left:25px;bottom:25px;text-align:left}
+.product-label small{letter-spacing:3px}.product-label h3{font-size:38px;margin-top:5px}
+.product-stage h2{margin-top:55px}
+.product-stage p{color:var(--muted);margin-top:18px}
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.gallery figure{overflow:hidden;height:430px;position:relative}
+.gallery figure:nth-child(1){grid-column:span 7}.gallery figure:nth-child(2){grid-column:span 5}
+.gallery figure:nth-child(3){grid-column:span 5}.gallery figure:nth-child(4){grid-column:span 7}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform .7s}.gallery figure:hover img{transform:scale(1.07)}
+.footer{padding:90px 6vw 35px;border-top:1px solid var(--line)}
+.footer-top{display:flex;justify-content:space-between;gap:30px;align-items:end}
+.footer h2{max-width:700px}
+.footer-bottom{margin-top:90px;color:#666;font-size:11px;display:flex;justify-content:space-between}
+.reveal{opacity:0;transform:translateY(45px);transition:opacity .9s,transform .9s}.reveal.show{opacity:1;transform:none}
+@media(max-width:800px){
+  .navlinks{display:none}.nav{padding:18px 5vw}
+  .hero h1{letter-spacing:-3px}.hero h1 span{letter-spacing:6px}
+  .section{padding:85px 5vw}.section-head,.story{display:block}
+  .intro{margin-top:25px}.feature-grid{grid-template-columns:1fr}
+  .media-card{min-height:520px}.side-stack{height:900px}
+  .story img{height:500px;margin-bottom:40px}.specs{grid-template-columns:1fr}
+  .spec{border-right:0;border-bottom:1px solid var(--line)}
+  .gallery{display:block}.gallery figure{height:430px;margin-bottom:16px}
+  .footer-top{display:block}.footer-bottom{display:block;line-height:2}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="logo" href="#">MUSA</a>
+  <div class="navlinks">
+    <a href="#story">Story</a><a href="#features">Features</a><a href="#gallery">Gallery</a><a href="#shop">Shop</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <video autoplay muted loop playsinline poster="assets/musa-final.png"><source src="assets/hero.mp4" type="video/mp4"></video>
+  <div class="hero-content" id="heroContent">
+    <div class="kicker">Travel · Explore · More</div>
+    <h1>BUILT FOR<span>YOUR JOURNEY</span></h1>
+    <a class="cta" href="#shop">SHOP NOW&nbsp; →</a>
+  </div>
+  <div class="scroll">SCROLL TO EXPLORE ↓</div>
+</header>
+
+<section class="section reveal" id="features">
+  <div class="section-head">
+    <div><div class="eyebrow">01 / Designed to move</div><h2>READY<br>TO EXPLORE.</h2></div>
+    <p class="intro">A travel backpack made for long days, changing weather and the moments when the next destination matters more than the last.</p>
+  </div>
+
+  <div class="feature-grid">
+    <article class="media-card">
+      <video autoplay muted loop playsinline><source src="assets/product.mp4" type="video/mp4"></video>
+      <div class="card-copy"><h3>Every detail has a purpose.</h3><p>Organized storage, durable construction and a clean silhouette designed around movement.</p></div>
+    </article>
+    <div class="side-stack">
+      <article class="media-card">
+        <video autoplay muted loop playsinline><source src="assets/water.mp4" type="video/mp4"></video>
+        <div class="card-copy"><h3>Ready for weather.</h3><p>Water-resistant fabric helps protect what you carry.</p></div>
+      </article>
+      <article class="media-card">
+        <img src="assets/musa-editorial.png" alt="MUSA backpack editorial">
+        <div class="card-copy"><h3>Made for the journey.</h3><p>Premium travel aesthetic with practical everyday function.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="story">
+  <div class="story">
+    <img src="assets/backpack-mountain.jpeg" alt="MUSA backpack in the mountains">
+    <div class="story-text">
+      <div class="eyebrow">02 / The MUSA idea</div>
+      <h2>MORE THAN<br>A BACKPACK.</h2>
+      <p>MUSA is built around a simple idea: travel should feel lighter. The design keeps essentials organized while the form stays minimal, durable and ready for the next view.</p>
+      <div class="specs">
+        <div class="spec"><b>01</b><span>ORGANIZED STORAGE</span></div>
+        <div class="spec"><b>02</b><span>DURABLE MATERIAL</span></div>
+        <div class="spec"><b>03</b><span>TRAVEL READY</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product" id="shop">
+  <div class="product-stage reveal">
+    <div class="product-card" id="tiltCard">
+      <img src="assets/musa-final.png" alt="MUSA backpack">
+      <div class="product-label"><small>MUSA / 001</small><h3>THE TRAVEL PACK</h3></div>
+    </div>
+    <h2>GO FURTHER.</h2>
+    <p>Comfortable. Light. Always with you.</p>
+    <a class="cta" href="#gallery">VIEW DETAILS&nbsp; →</a>
+  </div>
+</section>
+
+<section class="section reveal" id="gallery">
+  <div class="section-head">
+    <div><div class="eyebrow">03 / Visual journal</div><h2>TRAVEL.<br>EXPLORE.<br>MORE.</h2></div>
+    <p class="intro">From close-up materials to wide mountain landscapes — the product is shown in the environments it was designed for.</p>
+  </div>
+  <div class="gallery">
+    <figure><img src="assets/musa-editorial.png" alt="MUSA backpack detail"></figure>
+    <figure><img src="assets/backpack-mountain.jpeg" alt="MUSA backpack mountain scene"></figure>
+    <figure><img src="assets/musa-final.png" alt="MUSA backpack rear"></figure>
+    <figure><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="assets/hiker.mp4" type="video/mp4"></video></figure>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div><div class="eyebrow">MUSA / 2026</div><h2>YOUR NEXT<br>VIEW IS OUT THERE.</h2></div>
+    <a class="cta" href="#shop">SHOP NOW&nbsp; →</a>
+  </div>
+  <div class="footer-bottom"><span>TRAVEL · EXPLORE · MORE</span><span>© MUSA</span></div>
+</footer>
+<div>
+  <h1>i am the </h1>
+</div>
+
+<script>
+const hero = document.getElementById('heroContent');
+window.addEventListener('mousemove', e => {
+  if (!hero) return;
+  const x = (e.clientX / innerWidth - .5) * 2;
+  const y = (e.clientY / innerHeight - .5) * 2;
+  hero.style.transform = `perspective(900px) rotateY(${x*3}deg) rotateX(${-y*3}deg) translateZ(8px)`;
+});
+
+const card = document.getElementById('tiltCard');
+card.addEventListener('mousemove', e => {
+  const r = card.getBoundingClientRect();
+  const x = (e.clientX-r.left)/r.width-.5;
+  const y = (e.clientY-r.top)/r.height-.5;
+  card.style.transform = `rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.02)`;
+});
+card.addEventListener('mouseleave',()=>card.style.transform='rotateY(0) rotateX(0) scale(1)');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
